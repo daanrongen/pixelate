@@ -51,7 +51,7 @@ if __name__ == "__main__":
     OUT_DIR = args.outdir
 
     os.makedirs(OUT_DIR, exist_ok=True)
-    filename = os.path.splitext(os.path.basename(IMAGE))[0]
+    filename = os.path.basename(IMAGE)
 
     image = Image.open(IMAGE)
     image = center_crop(image, SIZE)
@@ -60,7 +60,7 @@ if __name__ == "__main__":
     factor = FACTOR
 
     small = image.resize((40 * 2 * factor, 24 * 3 * factor), resample=Image.BILINEAR)
-    pixels = np.asarray(small)
+    pixels = np.asarray(small).copy()
     (w, h, _) = pixels.shape
 
     for x in range(w):
@@ -69,4 +69,5 @@ if __name__ == "__main__":
 
     mode7 = Image.fromarray(pixels)
     result = mode7.resize(image.size, Image.NEAREST)
-    result.save(f"{OUT_DIR}/{filename}.png")
+
+    result.save(os.path.join(OUT_DIR, filename))
