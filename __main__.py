@@ -59,7 +59,7 @@ if __name__ == "__main__":
     image = image.convert("RGB")
     factor = FACTOR
 
-    small = image.resize((40 * 2 * factor, 24 * 3 * factor), resample=Image.BILINEAR)
+    small = image.resize((40 * 2 * factor, 25 * 3 * factor), resample=Image.BILINEAR)
     pixels = np.asarray(small).copy()
     (w, h, _) = pixels.shape
 
